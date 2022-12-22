@@ -38,6 +38,12 @@ INSTALLED_APPS = [
     'user_profile.apps.UserProfileConfig'
 ]
 
+AUTH_USER_MODEL = 'user_profile.UserProfile'
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'user_profile.backends.UserAuthentication',
+]
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
