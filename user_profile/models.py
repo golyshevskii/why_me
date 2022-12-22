@@ -49,8 +49,8 @@ class UserProfileManager(BaseUserManager):
 
     def create_superuser(self, email, password=None):
         user = self._create_user(email, password)
-        user.is_stuff = True
-        user.is_active = True
+        user.is_staff = True
+        user.is_superuser = True
         user.save(using=self._db)
         return user
     
@@ -60,14 +60,14 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
 
     username = models.CharField(verbose_name='Username', max_length=100, unique=True)
     email = models.EmailField(verbose_name='User email', max_length=255, unique=True, blank=False, null=False)
-    password = models.CharField(verbose_name='User password', max_length=64)
+    password = models.CharField(verbose_name='User password', max_length=256)
     is_active = models.BooleanField(verbose_name='User is active', default=True)
-    is_stuff = models.BooleanField(verbose_name='User is stuff', default=False)
+    is_staff = models.BooleanField(verbose_name='User is stuff', default=False)
     is_superuser = models.BooleanField(verbose_name='User is admin', default=False)
     date_joined = models.DateTimeField(verbose_name="Date joined", default=timezone.now)
 
     fullname = models.CharField(verbose_name='Full name', max_length=255)
-    birthday = models.DateField(verbose_name='Birthday')
+    birthday = models.DateField(verbose_name='Birthday', blank=True, null=True)
     country = models.CharField(verbose_name='Country of residence', max_length=170)
     city = models.CharField(verbose_name='City of residence', max_length=170)
     phone = models.CharField(verbose_name='User phone number', max_length=20)
