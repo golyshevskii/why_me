@@ -16,6 +16,6 @@ class UserAuthentication(BaseBackend):
             if user.check_password(password):
                 return user
             else:
-                return
+                return None
         except UserProfile.DoesNotExist:
-            return
+            return None
