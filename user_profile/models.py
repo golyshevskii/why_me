@@ -87,4 +87,4 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
         verbose_name_plural = 'User Profiles'
 
     def __str__(self) -> str:
-        return self.fullname
+        return self.email
