@@ -66,20 +66,20 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
     is_superuser = models.BooleanField(verbose_name='User is admin', default=False)
     date_joined = models.DateTimeField(verbose_name="Date joined", default=timezone.now)
 
-    fullname = models.CharField(verbose_name='Full name', max_length=255)
+    fullname = models.CharField(verbose_name='Full name', max_length=255, blank=True, null=True)
     birthday = models.DateField(verbose_name='Birthday', blank=True, null=True)
-    country = models.CharField(verbose_name='Country of residence', max_length=170)
-    city = models.CharField(verbose_name='City of residence', max_length=170)
-    phone = models.CharField(verbose_name='User phone number', max_length=20)
-    site = models.CharField(verbose_name='User site', max_length=255)
+    country = models.CharField(verbose_name='Country of residence', max_length=170, blank=True, null=True)
+    city = models.CharField(verbose_name='City of residence', max_length=170, blank=True, null=True)
+    phone = models.CharField(verbose_name='User phone number', max_length=20, blank=True, null=True)
+    site = models.CharField(verbose_name='User site', max_length=255, blank=True, null=True)
 
-    photo = models.ImageField(verbose_name='User photo', upload_to='images/photos/')
-    cover = models.ImageField(verbose_name='User cover', upload_to='images/covers/')
-    general_info = models.TextField(verbose_name='User general information', max_length=2000)
+    photo = models.ImageField(verbose_name='User photo', upload_to='images/photos/', blank=True, null=True)
+    cover = models.ImageField(verbose_name='User cover', upload_to='images/covers/', blank=True, null=True)
+    general_info = models.TextField(verbose_name='User general information', max_length=2000, blank=True, null=True)
 
     objects = UserProfileManager()
 
-    USERNAME_FIELD = 'email'
+    USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = []
 
     class Meta:
