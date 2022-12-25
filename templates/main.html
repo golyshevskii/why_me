@@ -5,12 +5,15 @@
     <!-- make your website look good on all devices -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{% block title %}WhyMe | Space{% endblock %}</title>
+    <title>{% block title %}WM | space{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
-    <ul>okay</ul>
+    {% if request.user.is_authenticated %}
+    <nav>
+        <a class="btn btn-primary btn-block" href="{% url 'logoutpage' %}">logout</a>
+    </nav>
+    {% endif %}
     {% block content %}
-    <ul>not okay</ul>
     {% endblock %}
 </body>
