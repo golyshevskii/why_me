@@ -1,8 +1,8 @@
-from django.contrib.auth.backends import BaseBackend
+from django.contrib.auth.backends import ModelBackend
 from .models import UserProfile
 
 
-class UserAuthentication(BaseBackend):
+class UserAuthentication(ModelBackend):
     """User authentication by email or username"""
 
     def authenticate(self, request, username, password):
@@ -13,7 +13,7 @@ class UserAuthentication(BaseBackend):
         
         try:
             user = UserProfile.objects.get(**context)
-            if user.check_password(password):
+            if user.check_password(password) and self.user_can_authenticate(user):
                 return user
             else:
                 return None
