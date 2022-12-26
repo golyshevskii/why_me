@@ -4,4 +4,4 @@ from django.contrib.auth.decorators import login_required
 
 @login_required(login_url='loginpage')
 def main_page(request):
-    return render(request=request, template_name='main.html')
+    return render(request, 'main.html')

@@ -16,10 +16,10 @@
     <div class="d-grid gap-2 col-8 mx-auto">
         <button class="btn btn-warning btn-block mb-3" type="submit">login</button>
     </div>
-    {% for error in form.non_field_errors %}
-        <div>
-            {{ error }}
-        </div>
-    {% endfor %}
+    {% if error %}
+    <div>
+        {{ error }}
+    </div>
+    {% endif %}
 </form>
 {% endblock %}

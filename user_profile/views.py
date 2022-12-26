@@ -1,29 +1,42 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
-from django.contrib.auth import logout
+from django.contrib.auth import logout, login, authenticate
 from . import forms
 
 
-
 @login_required(login_url='loginpage')
-def user_profile_page(request, user=None):
+def user_profile_page(request, username=None):
     """Function that render user profile page"""
-    context = {'user': user}
-    return render(request, template_name='user_profile.html', context=context)
+    return render(request, 'user_profile.html')
+
 
 @login_required(login_url='loginpage')
 def to_user_profile_page(request):
     """Function that redirect user to the user profile page"""
 
-    return redirect('userprofilepage', user=request.user.username)
+    return redirect('userprofilepage', username=request.user.username)
 
 
-class LoginPage(LoginView):
-    """Class that login a user into site"""
+def login_page(request):
+    context = {'error': None}
 
-    form_class = forms.LoginForm
-    template_name = 'login.html'
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = authenticate(request, 
+                            username=username, 
+                            password=password)
+
+        if user:
+            login(request, user)
+            return redirect('userprofilepage', username=user.username)
+        else:
+            context['error'] = 'incorrect username or password'
+
+    return render(request, 'login.html', context=context)
+
 
 
 @login_required(login_url='loginpage')
