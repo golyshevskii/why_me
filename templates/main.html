@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <head>
     {% load static %}
     <meta charset="utf-8">
@@ -7,13 +8,17 @@
 
     <title>{% block title %}WM | space{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <script src="{% static 'js/bootstrap.js' %}"></script>
 </head>
+
 <body>
-    {% if request.user.is_authenticated %}
-    <nav>
-        <a class="btn btn-primary btn-block" href="{% url 'logoutpage' %}">logout</a>
-    </nav>
-    {% endif %}
-    {% block content %}
-    {% endblock %}
+    <div class="container">
+        {% if request.user.is_authenticated %}
+        <nav class="">
+            <a class="" href="{% url 'logoutpage' %}">logout</a>
+        </nav>
+        {% endif %}
+        {% block content %}
+        {% endblock %}
+    </div>
 </body>
