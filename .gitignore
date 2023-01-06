@@ -3,3 +3,5 @@
 .dockerignore
 venv
 commands.txt
+.env
+__pycache__
