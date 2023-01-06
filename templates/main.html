@@ -8,11 +8,10 @@
 
     <title>{% block title %}WM | space{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    <script src="{% static 'js/bootstrap.js' %}"></script>
 </head>
 
 <body>
-    <div class="container">
+    <div class="container-fluid">
         {% if request.user.is_authenticated %}
         <nav class="">
             <a class="" href="{% url 'logoutpage' %}">logout</a>
@@ -21,4 +20,6 @@
         {% block content %}
         {% endblock %}
     </div>
+    {% block scripts %}
+    {% endblock %}
 </body>
