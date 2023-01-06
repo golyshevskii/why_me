@@ -3,25 +3,69 @@
 {% block title %}WM | login{% endblock %}
 
 {% block content %}
-<div class="login-box">
-    <form method="post" action="." class="">
-        {% csrf_token %}
-        <div class="">
-            <input required type="text" name="username" class="" placeholder="username or email"
-                style="border-radius: 10px;" required />
-        </div>
-        <div class="">
-            <input required type="password" name="password" class="" placeholder="password"
-                style="border-radius: 10px;" required />
-        </div>
-        <div class="">
-            <button class="" type="submit">login</button>
-        </div>
-        {% if error %}
-        <div>
-            {{ error }}
-        </div>
-        {% endif %}
-    </form>
+<div class="login-errors-main-box">
+    {% if error %}
+    <div class="login-erros-box">
+        {{ error }}
+    </div>
+    {% endif %}
 </div>
+<section class="forms-section">
+    <div class="forms">
+        <div class="form-wrapper is-active">
+            <button type="button" class="switcher switcher-login shadow-switcher">
+                login
+            </button>
+            <form method="post" action="." class="form form-login">
+                {% csrf_token %}
+                <fieldset>
+                    <div class="input-block mb-2">
+                        <input class="input ps-2" id="login-email" name="username" type="username"
+                            placeholder="username or email" required>
+                    </div>
+                    <div class="input-block mb-4">
+                        <input class="input ps-2" id="login-password" name="password" type="password"
+                            placeholder="password" required>
+                    </div>
+                </fieldset>
+                <button type="submit" class="btn-login shadow-button">login</button>
+            </form>
+        </div>
+        <div class="form-wrapper">
+            <button type="button" class="switcher switcher-signup shadow-switcher">
+                sign up
+            </button>
+            <form method="post" action="." class="form form-signup">
+                {% csrf_token %}
+                <fieldset>
+                    <div class="input-block mb-2">
+                        <input class="input ps-2" id="signup-email" name="username" type="username"
+                            placeholder="username" required>
+                    </div>
+                    <div class="input-block mb-2">
+                        <input class="input ps-2" id="signup-password" name="email" type="email" placeholder="email"
+                            required>
+                    </div>
+                    <div class="input-block mb-4">
+                        <input class="input ps-2" id="signup-password-confirm" name="password" type="password"
+                            placeholder="password" required>
+                    </div>
+                </fieldset>
+                <button type="submit" class="btn-signup shadow-button">sign up</button>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% block scripts %}
+<script>
+    const switchers = [...document.querySelectorAll('.switcher')]
+
+    switchers.forEach(item => {
+        item.addEventListener('click', function () {
+            switchers.forEach(item => item.parentElement.classList.remove('is-active'))
+            this.parentElement.classList.add('is-active')
+        })
+    })
+</script>
 {% endblock %}
